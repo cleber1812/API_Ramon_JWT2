@@ -6,7 +6,7 @@
   "scripts": {
     "test": "nodemon index.js",
     "start": "node index.js",
-    "build": "npx sequelize db:migrate && node index.js"
+    "build": "npx sequelize db:migrate"
   },
   "keywords": [],
   "author": "",
