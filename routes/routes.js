@@ -30,8 +30,7 @@ routes.post('/logout', (req,res) => {
 // routes.get('/pessoas', verificar(), PessoaController.readAll);
 routes.get('/pessoas', PessoaController.readAll);
 routes.post('/pessoas', PessoaController.create);
-// routes.get('/meusdados', verificar(), PessoaController.myData)
-routes.get('/meusdados', PessoaController.myData)
+routes.get('/meusdados', verificar(), PessoaController.myData)
 
 routes.get('/pessoa/:id', PessoaController.readOne);
 routes.put('/pessoa/:id', PessoaController.update);
