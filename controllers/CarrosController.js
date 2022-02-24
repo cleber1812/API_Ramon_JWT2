@@ -88,8 +88,8 @@ class CarrosController {
 
     async atualizarCarro(req,res) {
         const schema = Yup.object().shape({
-            anoFabricacao: Yup.number().positive().integer().min(1950),
-            anoModelo: Yup.number().positive().integer().min(1950),
+            anoFabricacao: Yup.number().positive().integer(),
+            anoModelo: Yup.number().positive().integer(),
         });
 
         if(!(await schema.isValid(req.body))){
