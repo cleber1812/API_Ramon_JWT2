@@ -87,14 +87,14 @@ class CarrosController {
     }
 
     async atualizarCarro(req,res) {
-        // const schema = Yup.object().shape({
-        //     anoFabricacao: Yup.number().positive().integer().min(1950),
-        //     anoModelo: Yup.number().positive().integer().min(1950),
-        // });
+        const schema = Yup.object().shape({
+            anoFabricacao: Yup.number().positive().integer().min(1950),
+            anoModelo: Yup.number().positive().integer().min(1950),
+        });
 
-        // if(!(await schema.isValid(req.body))){
-        //     return res.status(400).json({ error: 'Ano de Fabricação e Modelo devem ser que 1950'})
-        // }
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: 'Ano de Fabricação e Modelo devem ser que 1950'})
+        }
 
         try {
             let carroUpdate = await Carro.findByPk(req.params.id);
