@@ -1,6 +1,8 @@
 const { Carro } = require('../models');
 const { Op } = require("sequelize");
 
+const Yup = require("yup");
+
 // const Carros = require('../models/carros.json');
 
 class CarrosController {
@@ -49,6 +51,15 @@ class CarrosController {
 
     async inserirCarro(req,res) {
         /* Escrever lógica de negócio */
+        const schema = Yup.object().shape({
+            anoFabricacao: Yup.number().positive().integer().min(1950),
+            anoModelo: Yup.number().positive().integer().min(1950),
+        });
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: 'Ano de Fabricação e Modelo devem ser que 1950'})
+        }
+        
         try {
             let carroParaInserir = req.body;
             const carroResultado = await Carro.create(carroParaInserir);
@@ -76,6 +87,15 @@ class CarrosController {
     }
 
     async atualizarCarro(req,res) {
+        const schema = Yup.object().shape({
+            anoFabricacao: Yup.number().positive().integer().min(1950),
+            anoModelo: Yup.number().positive().integer().min(1950),
+        });
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: 'Ano de Fabricação e Modelo devem ser que 1950'})
+        }
+
         try {
             let carroUpdate = await Carro.findByPk(req.params.id);
             if (carroUpdate) {

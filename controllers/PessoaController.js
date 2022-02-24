@@ -76,7 +76,7 @@ class PessoaController {
         });
 
         if(!(await schema.isValid(req.body))){
-            return res.status(400).json({ error: 'Falha na validação.'})
+            return res.status(400).json({ error: 'Insira um e-mail válido.'})
         }
 
         try {
@@ -115,6 +115,14 @@ class PessoaController {
     }
 
     async update(req,res) { /* PUT */
+        const schema = Yup.object().shape({
+            email: Yup.string().email(),
+        });
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: 'Insira um e-mail válido.'})
+        }
+
         try {
             let pessoaUpdate = await Pessoa.findByPk(req.params.id);
             if (pessoaUpdate) {
