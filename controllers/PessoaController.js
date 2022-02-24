@@ -1,3 +1,7 @@
+const Yup = require('yup');
+
+// import * as Yup from 'yup';
+
 const { Pessoa } = require ('../models/');
 const { Op } = require("sequelize");
 const jwt = require('jsonwebtoken');
@@ -67,6 +71,14 @@ class PessoaController {
     }
 
     async create(req,res) { /* POST */
+        const schema = Yup.object().shape({
+            email: Yup.string().email().required(),
+        });
+
+        if(!(await schema.isValid(req.body))){
+            return res.status(400).json({ error: 'Falha na validação.'})
+        }
+
         try {
             const pessoa = await Pessoa.create(req.body);
             return res.status(200).json(pessoa);
