@@ -101,7 +101,7 @@ class PessoaController {
             return res.status(200).json(pessoa);
             }
             else 
-                return res.status(200).json({mensagem: "Email já possui cadastro"})
+                return res.status(401).json({mensagem: "Email já possui cadastro"})
         }
         catch (e) {
             return res.status(400).json({error: e});
