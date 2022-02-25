@@ -72,19 +72,39 @@ class PessoaController {
 
     async create(req,res) { /* POST */
         const schema = Yup.object().shape({
+            nome: Yup.string().required(),
             email: Yup.string().email().required(),
+            senha: Yup.string().required(),
         });
 
         if(!(await schema.isValid(req.body))){
-            return res.status(400).json({ error: 'Insira um e-mail válido.'})
+            return res.status(400).json({ error: 'Falha na validação'})
         }
+        
+        let email = req.body.email;
 
-        try {
-            const pessoa = await Pessoa.create(req.body);
+        try {            
+            const pessoa_encontrada = await Pessoa.findOne({
+                attributes: ['id','nome', 'email','createdAt','updatedAt'],
+                where: {
+                    [Op.and]: [
+                        { 
+                            email: {
+                            [Op.eq]: email,
+                            }
+                        },                               
+                    ]
+                }
+            });             
+            if (!pessoa_encontrada) {            
+            const pessoa = await Pessoa.create(req.body);            
             return res.status(200).json(pessoa);
+            }
+            else 
+                return res.status(200).json({mensagem: "Email já possui cadastro"})
         }
         catch (e) {
-            return res.status(200).json({error: e});
+            return res.status(400).json({error: e});
         }
     }
 
