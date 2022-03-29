@@ -27,8 +27,8 @@ routes.post('/logout', (req,res) => {
     res.json({auth: false, token:null});
 });
 
-// routes.get('/pessoas', verificar(), PessoaController.readAll);
-routes.get('/pessoas', PessoaController.readAll);
+routes.get('/pessoas', verificar(), PessoaController.readAll);
+// routes.get('/pessoas', PessoaController.readAll);
 routes.post('/pessoas', PessoaController.create);
 routes.get('/meusdados', verificar(), PessoaController.myData)
 
