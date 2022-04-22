@@ -52,12 +52,15 @@ class CarrosController {
     async inserirCarro(req,res) {
         /* Escrever lógica de negócio */
         const schema = Yup.object().shape({
+            marca: Yup.string().required(),
+            modelo: Yup.string().required(),
             anoFabricacao: Yup.number().positive().integer().min(1950),
             anoModelo: Yup.number().positive().integer().min(1950),
+            cor: Yup.string().required(),
         });
 
         if(!(await schema.isValid(req.body))){
-            return res.status(400).json({ error: 'Ano de Fabricação e Modelo devem ser que 1950'})
+            return res.status(400).json({ error: 'Preencha todos os dados'})
         }
         
         try {
@@ -93,7 +96,7 @@ class CarrosController {
         });
 
         if(!(await schema.isValid(req.body))){
-            return res.status(400).json({ error: 'Ano de Fabricação e Modelo devem ser que 1950'})
+            return res.status(400).json({ error: 'Ano de Fabricação e Modelo devem ser maior que 1950'})
         }
 
         try {
