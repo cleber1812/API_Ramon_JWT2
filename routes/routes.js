@@ -1,8 +1,10 @@
 const { Router } = require('express');
 const CarrosController = require('../controllers/CarrosController');
 const PessoaController = require('../controllers/PessoaController');
+const ImagensCarroController = require('../controllers/ImagensCarroController');
 const routes = Router();
 const verificar = require ('../middlewares/autenticacao');
+const uploadCarro = require ('../middlewares/uploadimage')
 
 /* MIDDLEWARES */
 
@@ -46,5 +48,9 @@ routes.post('/carros', CarrosController.inserirCarro);
 routes.put('/carro/:id', CarrosController.atualizarCarro);
 routes.delete('/carro/:id', CarrosController.deletarCarro);
 
+
+//ROTAS IMAGENS//
+routes.post('/upload-image', uploadCarro.single('image'), ImagensCarroController.uploadImage);
+routes.get('/list-image', ImagensCarroController.listImage);
 
 module.exports = routes;
