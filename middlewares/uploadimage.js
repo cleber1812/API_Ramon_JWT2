@@ -6,7 +6,9 @@ module.exports = (
         destination: (req, file, cb) => {
           cb(null, 'public/upload/carros')
         },
-        filename: (req, file, cb) => {          
+        filename: (req, file, cb) => {      
+          //criar uma variável que: diminui o originalname, tira espaços e caracteres especiais    
+          //No front, a library ExpoImagePick já atribui um Nome aleatório, o problema é quando testa pelo Postman.
           cb(null, Date.now().toString() + '_' + file.originalname)
         }
     }),

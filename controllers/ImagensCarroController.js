@@ -83,15 +83,21 @@ class ImagensCarroController {
 //Arquivos com caracteres especiais não gera ID e salva nome random ao invés do original.
 //Consegui pegar o nome gerado pelo Cloudinary ao invés do filename do Body (newPath.id).
 //Cloudinary Não passa a extensão da imagem no nome.       
-//Exibindo apenas jpg no Front (mas imagem está salva no DB e no Cloudinary).
+//Resolvi a extensao com a library Mime no middlewares.
 
         // let imagemParaInserir = {image: req.file.filename};
-        let imagemParaInserir = {image: newPath.id};
+        const body = req.body;
+        // let imagemParaInserir = {image: newPath.id};
+        // let imagemParaInserir = {image: newPath.id, body};
+        let imagemParaInserir = {image: newPath.id, marca:body.marca};
+        // let carroParaInserir = req.body;
+        // const imagemResultado = await ImagensCarro.create(imagemParaInserir, carroParaInserir);
         const imagemResultado = await ImagensCarro.create(imagemParaInserir);
 
         // console.log (newPath.id)         
-        console.log ({image: newPath.id}) 
-        // console.log (imagemParaInserir)
+        // console.log ({image: newPath.id})         
+        console.log (imagemParaInserir)
+        // console.log (carroParaInserir) 
             
             res.status(200).json({
                 message:'Image uploaded succesfully',
