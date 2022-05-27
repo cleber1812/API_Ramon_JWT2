@@ -95,7 +95,7 @@ class ImagensCarroController {
         const imagemResultado = await ImagensCarro.create(imagemParaInserir);
 
         // console.log (newPath.id)         
-        console.log ({image: newPath.id})         
+        // console.log ({image: newPath.id})         
         console.log (imagemParaInserir)
         // console.log (carroParaInserir) 
             
