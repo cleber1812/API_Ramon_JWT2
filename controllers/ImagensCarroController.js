@@ -85,10 +85,10 @@ class ImagensCarroController {
 //Cloudinary Não passa a extensão da imagem no nome.       
 //Resolvi a extensao com a library Mime no middlewares.
 
-        // let imagemParaInserir = {image: req.file.filename};
-        const body = req.body;
+        // let imagemParaInserir = {image: req.file.filename};        
         // let imagemParaInserir = {image: newPath.id};
         // let imagemParaInserir = {image: newPath.id, body};
+        const body = req.body;
         let imagemParaInserir = {image: newPath.id, marca:body.marca};
         // let carroParaInserir = req.body;
         // const imagemResultado = await ImagensCarro.create(imagemParaInserir, carroParaInserir);
@@ -102,6 +102,8 @@ class ImagensCarroController {
             res.status(200).json({
                 message:'Image uploaded succesfully',
                 data: urls,
+                body,
+                imagemParaInserir,
                 imagemResultado
             })           
         }else{
