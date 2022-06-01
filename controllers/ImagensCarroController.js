@@ -96,7 +96,10 @@ class ImagensCarroController {
 
         // console.log (newPath.id)         
         // console.log ({image: newPath.id})         
+        console.log (data.urls)
+        console.log (body)
         console.log (imagemParaInserir)
+        console.log (imagemResultado)
         // console.log (carroParaInserir) 
             
             res.status(200).json({
