@@ -1,21 +1,12 @@
 const cloudinary = require('cloudinary')
 // const dotenv = require('dotenv')
-const dotenv = require('dotenv')
+// dotenv.config()
+require('dotenv').config({path: './config/.env'});
 
-
-dotenv.config()
-
-// cloudinary.config({
-//    cloud_name: process.env.CLOUD_NAME, 
-//    api_key: process.env.CLOUDINARY_API_KEY, 
-//    api_secret: process.env.CLOUDINARY_API_SECRET
-// })
-
-//Não consegui ocultar as credenciais no dot .env
 cloudinary.config({
-    cloud_name: 'dd6rpe5b4', 
-    api_key: '966552976524646', 
-    api_secret: 'Q-SIyQAK3WmeXfNzHTpCsQLFV30'
+   cloud_name: process.env.CLOUD_NAME, 
+   api_key: process.env.CLOUDINARY_API_KEY, 
+   api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
 // const uploads = (file, folder) => {
